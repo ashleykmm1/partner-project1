@@ -1,12 +1,13 @@
+import argparse
 import pika
 import uuid
 import json
 
 class CustomLootTable:
-    def __init__(self, name, rarity, value):
+    def __init__(self, name, rarity, cost):  
         self.name = name
         self.rarity = rarity
-        self.value = value
+        self.cost = cost  
 
 class DNDClient:
     def __init__(self):
@@ -42,20 +43,31 @@ class DNDClient:
             "loot_table": {
                 "name": loot_table.name,
                 "rarity": loot_table.rarity,
-                "value": loot_table.value
+                "cost": loot_table.cost  
             }
         }
         return self.call(json.dumps(request))
 
-def main():
+def add_loot(args):
     client = DNDClient()
-
-    # test, this will print name rarity and value in a json file.
-    custom_loot_table = CustomLootTable(name="Sword of Power", rarity="Legendary", value=1000)
+    custom_loot_table = CustomLootTable(name=args.name, rarity=args.rarity, cost=args.cost)  
     response = client.create_custom_loot_table(custom_loot_table)
     print("Response:", response)
-
     client.connection.close()
+
+def main():
+    parser = argparse.ArgumentParser(description="Manage custom loot tables")
+    subparsers = parser.add_subparsers(title="subcommands", dest="subcommand", required=True)
+
+    parser_add_loot = subparsers.add_parser("add-loot", help="Add a custom loot table")
+    parser_add_loot.add_argument("--name", required=True, help="Name of the loot")
+    parser_add_loot.add_argument("--rarity", required=True, help="Rarity of the loot")
+    parser_add_loot.add_argument("--cost", required=True, type=int, help="Cost of the loot")  
+
+    args = parser.parse_args()
+
+    if args.subcommand == "add-loot":
+        add_loot(args)
 
 if __name__ == "__main__":
     main()
