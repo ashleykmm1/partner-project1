@@ -14,6 +14,9 @@ How to add custom:
 In terminal write this: python dnd_client.py add-loot --name "____" --rarity "____" --cost ___
 Ex.  python dnd_client.py add-loot --name "Sword" --rarity "Legendary" --cost 1000
 
+How to delete an item:
+ex. python dnd_client.py delete-loot --name "____"
+
 UML diagram:
 ![image](https://github.com/ashleykmm1/partner-project1/assets/130413779/49912539-5f02-40f7-b19f-e4ccfbafa1d2)
 
