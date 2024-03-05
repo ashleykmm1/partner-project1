@@ -13,3 +13,9 @@ How to run:
 How to add custom:
 In terminal write this: python dnd_client.py add-loot --name "____" --rarity "____" --cost ___
 Ex.  python dnd_client.py add-loot --name "Sword" --rarity "Legendary" --cost 1000
+
+How to read from json file:
+python dnd_client.py read-loot-tables
+
+![image](https://github.com/ashleykmm1/partner-project1/assets/130413779/84894371-733c-4a37-b3c9-9adbbf75deb0)
+
